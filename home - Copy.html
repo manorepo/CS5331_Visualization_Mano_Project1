@@ -11,34 +11,7 @@
         svg {
             font-family: "Helvetica Neue", Helvetica;
         }
-        .d3-tip {
-            line-height: 1;
-            font-weight: bold;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            border-radius: 2px;
-        }
 
-        /* Creates a small triangle extender for the tooltip */
-        .d3-tip:after {
-            box-sizing: border-box;
-            display: inline;
-            font-size: 10px;
-            width: 100%;
-            line-height: 1;
-            color: rgba(0, 0, 0, 0.8);
-            content: "\25BC";
-            position: absolute;
-            text-align: center;
-        }
-
-        /* Style northward tooltips differently */
-        .d3-tip.n:after {
-            margin: -1px 0 0 0;
-            top: 100%;
-            left: 0;
-        }
         .line {
             fill: none;
             stroke: #000;
@@ -145,19 +118,17 @@
 </div>
 
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="js/bootstrap.min.js"></script>
 
-<script src="//d3js.org/d3.v4.min.js"></script>
-<script src="js/d3-tooltip.js"></script>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
 <script src="https://d3js.org/topojson.v1.min.js"></script>
 <script type="text/javascript">//
 
 //
-
-
 var allStatesData=[];
 var states;
 var map_states;
@@ -179,27 +150,34 @@ margin2 = {
 
 
 // Set the ranges
-var x = d3.scaleTime().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
 // 40 Custom DDV colors
-var color = d3.scaleOrdinal().range(["#48A36D", "#56AE7C", "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
+var color = d3.scale.ordinal().range(["#48A36D", "#56AE7C", "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
 
-var idleTimeout,
-        idleDelay = 350;
-var xScale2 = d3.scaleTime()
+
+var xScale2 = d3.time.scale()
         .range([0, width]); // Duplicate xScale for brushing ref later
 
 // Define the axes
-var xAxis = d3.axisBottom(x);
-
-var xAxis2 = d3.axisBottom(xScale2); // xAxis for brush slider
-
-var yAxis = d3.axisLeft(y);
-
+var xAxis = d3.svg.axis().scale(x)
+        .orient("bottom");
+var xAxis2 = d3.svg.axis() // xAxis for brush slider
+        .scale(xScale2)
+        .orient("bottom");
+var yAxis = d3.svg.axis().scale(y)
+        .orient("left");
 
 var brush=null;
 // Define the line
-
+var line = d3.svg.line()
+        .interpolate("basis")
+        .x(function(d) {
+            return x(d.date);
+        })
+        .y(function(d) {
+            return y(d.currentunemrate);
+        })
 
 
 // Append the time series svg canvas
@@ -209,36 +187,15 @@ var svg = d3.select(".plotframe").append("svg")
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-/* Initialize tooltip */
-
-var tip = d3.tip()
-        .attr('class', 'd3-tip')
-        .offset([-10, 0])
-        .html(function(d) {
-            console.log(d);
-            return "<strong>"+d.state+"</strong> <span style='color:red'>" + d.currentunemrate + "</span>";
-        });
-/* Invoke the tip in the context of your visualization */
-svg.call(tip);
-
-var line = d3.line()
-// .interpolate("basis")
-        .x(function(d) {
-            return x(d.date);
-        })
-        .y(function(d) {
-            return y(d.currentunemrate);
-        })
-        .curve(d3.curveCatmullRom.alpha(0.25))
 
 // Create invisible rect for mouse tracking
-/*svg.append("rect")
+svg.append("rect")
         .attr("width", width)
         .attr("height", height)
         .attr("x", 0)
         .attr("y", 0)
         .attr("id", "mouse-tracker")
-        .style("fill", "white");*/
+        .style("fill", "white");
 
 //append clip path for lines plotted, hiding those part out of bounds
 svg.append("defs")
@@ -250,12 +207,12 @@ svg.append("defs")
 d3.tsv("statecodes.tsv", function(data) {
     states = data;
 });
-//
+
 
 var finaldata = {
     seriesrecord: []
 };
-var parse = d3.timeParse("%m %Y");
+var parse = d3.time.format("%m %Y").parse;
 var state;
 var startYear;
 startYear=parse("01 1978");
@@ -311,15 +268,6 @@ d3.tsv("UE_AllStates.tsv", function(data) {
     ]);
     // color.domain(symbols.map(function(d){return d.key}));
     console.log(allStatesData);
-    brush = d3.brush()
-
-    // .on("brush", brushmove)
-            .on("end", brushend);
-    svg.append("g")
-            .attr("class", "brush")
-            .call(brush)
-            .selectAll('rect')
-            .attr('width', width);
      state = svg.selectAll(".state")
             .data(allStatesData) // Select nested data and append to new svg group elements
             .enter().append("g")
@@ -332,7 +280,33 @@ d3.tsv("UE_AllStates.tsv", function(data) {
                 return color(d.key);
             })
             .attr("clip-path", "url(#clip)"); //use clip path to make irrelevant part invisible;
+    tg=state.append("g")
+            .attr("class","tg");
 
+    tg.selectAll("text")
+            .append("text")
+            .data(function(d)
+            {
+                return d.values;
+            })
+            .enter().append("text")
+            .attr("class","dots")
+            .text(function(d){
+                return d.currentunemrate
+            })
+            .attr("clip-path", "url(#clip)") //use clip path to make irrelevant part invisible
+        /*    .attr("x", function(d) {
+              //  console.log(d.date);
+
+                return x(d.date) // If d.visible is true then draw line for this d selection
+            })
+            .attr("y", function(d) {
+                // console.log(d.key);
+
+                return y(d.currentunemrate) // If d.visible is true then draw line for this d selection
+            })*/
+
+    // draw legend
     var legendSpace = 450 / allStatesData.length; // 450/number of issues (ex. 40)
 
     state.append("rect")
@@ -401,48 +375,16 @@ d3.tsv("UE_AllStates.tsv", function(data) {
             .attr("class", "y axis")
             .call(yAxis);
 
+     brush = d3.svg.brush()
+            .x(x)
+            .on("brush", brushmove)
+            .on("brushend", brushend);
+    svg.append("g")
+            .attr("class", "brush")
+            .call(brush)
+            .selectAll('rect')
+            .attr('height', height);
 
-    tg=state.append("g")
-            .attr("class","tg");
-
-    tg.selectAll("circle")
-    //.append("text")
-            .data(function(d)
-            {
-                return d.values;
-            })
-            .enter().append("circle")
-
-            .attr("clip-path", "url(#clip)"); //use clip path to make irrelevant part invisible
-    /*    .attr("x", function(d) {
-     //  console.log(d.date);
-
-     return x(d.date) // If d.visible is true then draw line for this d selection
-     })
-     .attr("y", function(d) {
-     // console.log(d.key);
-
-     return y(d.currentunemrate) // If d.visible is true then draw line for this d selection
-     })*/
-
-    // draw legend
-    svg.selectAll("circle")
-
-            .on("mouseover", function(d1,i1){
-                svg.selectAll("circle")
-
-                .attr("fill-opacity",function (d){
-                    if(d1==d){
-                        return 1;
-                    }
-                    else
-                        return 0;
-                } );
-
-                tip.show(d1);
-            })
-
-            .on('mouseout', tip.hide)
 });
 function brushmove() {
     var extent = brush.extent();
@@ -453,55 +395,30 @@ function brushmove() {
 }
 
 function brushend() {
-//
-    bAutoDomain=true;
-    var s = d3.event.selection;
-    if (!s) {
-        if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
-        bAutoDomain=false;
-    } else {
-        x.domain([s[0][0], s[1][0]].map(x.invert, x));
-        y.domain([s[1][1], s[0][1]].map(y.invert, y));
-        svg.select(".brush").call(brush.move, null);
-    }
-    zoom(bAutoDomain);
-    //
+
    // var s = d3.event.selection;
     //y.domain([s[1][1], s[0][1]].map(y.invert, y));
-   // x.domain(brush.extent());
-  //  y.domain(brush.extent());
+    x.domain(brush.extent());
+    y.domain(brush.extent());
+    svg.transition().duration(500)
+            .select(".x.axis")
+            .call(xAxis);
+    d3.select(".brush").call(brush.clear());
 
-
-}
-
-function idled() {
-    idleTimeout = null;
-}
-
-function zoom(bAutoDomain) {
-    var t = svg.transition().duration(750);
-
-
-   // d3.select(".brush").call(brush.clear());
-    if(!bAutoDomain) {
-        maxY = findMaxY(allStatesData, startYear, endYear); // Find max Y rating value categories data with "visible"; true
-        minY = findMinY(allStatesData, startYear, endYear); // Find max Y rating value categories data with "visible"; true
-        y.domain([minY, maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
-        x.domain([startYear, endYear]);
-      //  svg.select(".x.axis").transition(t).call(xAxis);
-       // svg.select(".y.axis").transition(t).call(yAxis);
-    }
-    svg.select(".x.axis").transition(t).call(xAxis);
-    svg.select(".y.axis").transition(t).call(yAxis);
-    state.select("path")
+    maxY = findMaxY(allStatesData, y.domain()[0],endYear); // Find max Y rating value categories data with "visible"; true
+    minY = findMinY(allStatesData,startYear,endYear); // Find max Y rating value categories data with "visible"; true
+    y.domain([minY, maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
+    svg.select(".y.axis")
             .transition()
+            .call(yAxis);
+state.select("path")
+.transition()
             .attr("d", function(d) {
                 // console.log(d.key);
 
                 return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
             })
     // debugger
-
     var v=false
     var temp=state.filter(function (d) {
         v=d.visible;
@@ -511,75 +428,58 @@ function zoom(bAutoDomain) {
 
         return d.visible==false;
     });
-    temp.select(".tg")
-            .selectAll("circle")
-           // .attr("stroke", "#000")
-            .attr("fill", function(d,i){
-                return color(d.date.getMonth());
+   /* temp.select(".tg")
+            .selectAll("text")
+            .attr("x", function (d) {
+                //  console.log(d.date);
+
+                return x(d.date) // If d.visible is true then draw line for this d selection
             })
-            .attr("fill-opacity",1)
-            .attr("cx", function(d){
-                return x(d.date);
-            })
-            .attr("cy", function(d){
-                return y(d.currentunemrate);
-            })
-            .attr("r", function(d){
-                return d.currentunemrate;
+            .attr("y", function (d) {
+                // console.log(d.key);
+
+                return y(d.currentunemrate) // If d.visible is true then draw line for this d selection
             })
     temp2.select(".tg")
-            .selectAll("circle")
-            .attr("cx", function (d) {
+            .selectAll("text")
+            .attr("x", function (d) {
                 //  console.log(d.date);
 
                 return null // If d.visible is true then draw line for this d selection
             })
-            .attr("cy", function (d) {
+            .attr("y", function (d) {
                 // console.log(d.key);
 
                 return null // If d.visible is true then draw line for this d selection
             })
-
-    /* temp.select(".tg")
-     .selectAll("text")
-     .attr("x", function (d) {
-     //  console.log(d.date);
-
-     return x(d.date) // If d.visible is true then draw line for this d selection
-     })
-     .attr("y", function (d) {
-     // console.log(d.key);
-
-     return y(d.currentunemrate) // If d.visible is true then draw line for this d selection
-     })
-     temp2.select(".tg")
-     .selectAll("text")
-     .attr("x", function (d) {
-     //  console.log(d.date);
-
-     return null // If d.visible is true then draw line for this d selection
-     })
-     .attr("y", function (d) {
-     // console.log(d.key);
-
-     return null // If d.visible is true then draw line for this d selection
-     })
-     */
+*/
     state.select("rect")
             .transition()
             .attr("fill", function(d) {
-              //  console.log(d.key+" "+d.visible);
+                console.log(d.key+" "+d.visible);
                 return d.visible ? color(d.key) : "#F1F1F2";
             });
     //
+
+}
+
+function idled() {
+    idleTimeout = null;
+}
+
+function zoom() {
+    var t = svg.transition().duration(750);
+    svg.select(".x.axis").transition(t).call(xAxis);
+    svg.select(".y axis").transition(t).call(yAxis);
+
 }
 var mapWidth = 560, mapHeight = 500, centered;
 
-var projection = d3.geoAlbersUsa()
+var projection = albersUsaPr()
         .scale(500)
         .translate([mapWidth / 2, mapHeight / 2]);
 
-var mappath = d3.geoPath()
+var mappath = d3.geo.path()
         .projection(projection);
 
 var mapsvg = d3.select(".mapframe").append("svg")
@@ -596,7 +496,7 @@ var mapg = mapsvg.append("g");
 
 d3.json("usstates.json", function(error, us) {
     if (error) throw error;
-  //  console.log( us);
+    console.log( us);
 
     s=-1;
     map_states=mapg.append("g")
@@ -614,7 +514,7 @@ d3.json("usstates.json", function(error, us) {
             .attr("d", mappath)
             .on("click", clicked);
     for(var i=0;i<topojson.feature(us, us.objects.states).features[i].length;i++){
-     //   console.log( topojson.feature(us, us.objects.states).features[i].stateid+""+ topojson.feature(us, us.objects.states).features[i].properties.name);
+        console.log( topojson.feature(us, us.objects.states).features[i].stateid+""+ topojson.feature(us, us.objects.states).features[i].properties.name);
     }
     mapg.append("path")
             .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -630,8 +530,8 @@ function clicked(d) {
     }
     d.active=!d.active;
     allStatesData[index].visible=!allStatesData[index].visible;
-  //  console.log(index+" "+d.stateid);
-  //  console.log(allStatesData[index].key);
+    console.log(index+" "+d.stateid);
+    console.log(allStatesData[index].key);
     //d.visible = !d.visible; // If array key for this data selection is "visible" = true then make it false, if false then make it true
 
     // maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
@@ -641,8 +541,8 @@ function clicked(d) {
     //  .call(yAxis);
     maxY = findMaxY(allStatesData,startYear,endYear); // Find max Y rating value categories data with "visible"; true
     minY = findMinY(allStatesData,startYear,endYear); // Find max Y rating value categories data with "visible"; true
- //   console.log(minY);
-   // console.log(maxY);
+    console.log(minY);
+    console.log(maxY);
     y.domain([minY, maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
     svg.select(".y.axis")
             .transition()
@@ -654,9 +554,7 @@ function clicked(d) {
 
                 return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
             })
-
-
-    // debugger
+   // debugger
 var v=false
     var temp=state.filter(function (d) {
                 v=d.visible;
@@ -666,39 +564,35 @@ var v=false
 
         return d.visible==false;
     });
-               temp.select(".tg")
-            .selectAll("circle")
-                     //  .attr("stroke", "#000")
-                       .attr("fill", function(d,i){
-                           return color(d.date.getMonth());
-                       })
-                       .attr("fill-opacity",0)
-                       .attr("cx", function(d){
-                           return x(d.date);
-                       })
-                       .attr("cy", function(d){
-                           return y(d.currentunemrate);
-                       })
-                       .attr("r", function(d){
-                           return d.currentunemrate;
-                       })
+             /*  temp.select(".tg")
+            .selectAll("text")
+                        .attr("x", function (d) {
+                            //  console.log(d.date);
+
+                            return x(d.date) // If d.visible is true then draw line for this d selection
+                        })
+                        .attr("y", function (d) {
+                            // console.log(d.key);
+
+                            return y(d.currentunemrate) // If d.visible is true then draw line for this d selection
+                        })
     temp2.select(".tg")
-            .selectAll("circle")
-            .attr("cx", function (d) {
+            .selectAll("text")
+            .attr("x", function (d) {
                 //  console.log(d.date);
 
                 return null // If d.visible is true then draw line for this d selection
             })
-            .attr("cy", function (d) {
+            .attr("y", function (d) {
                 // console.log(d.key);
 
                 return null // If d.visible is true then draw line for this d selection
-            })
+            })*/
 
     state.select("rect")
             .transition()
             .attr("fill", function(d) {
-            //    console.log(d.key+" "+d.visible);
+                console.log(d.key+" "+d.visible);
                 return d.visible ? color(d.key) : "#F1F1F2";
             });
    // console.log(map_states.select("path"))
@@ -766,25 +660,25 @@ function findMinY(data,startYear,endYear) { // Define function "findMaxY"
 }
 
 // A modified d3.geo.albersUsa to include Puerto Rico.
-/*function albersUsaPr() {
+function albersUsaPr() {
     var ε = 1e-6;
 
-    var lower48 = d3.geoalbers();
+    var lower48 = d3.geo.albers();
 
     // EPSG:3338
-    var alaska = d3.geoconicEqualArea()
+    var alaska = d3.geo.conicEqualArea()
             .rotate([154, 0])
             .center([-2, 58.5])
             .parallels([55, 65]);
 
     // ESRI:102007
-    var hawaii = d3.geoconicEqualArea()
+    var hawaii = d3.geo.conicEqualArea()
             .rotate([157, 0])
             .center([-3, 19.9])
             .parallels([8, 18]);
 
     // XXX? You should check that this is a standard PR projection!
-    var puertoRico = d3.geoconicEqualArea()
+    var puertoRico = d3.geo.conicEqualArea()
             .rotate([66, 0])
             .center([0, 18])
             .parallels([8, 18]);
@@ -911,7 +805,7 @@ function findMinY(data,startYear,endYear) { // Define function "findMaxY"
     };
 
     return albersUsa.scale(1070);
-}*/
+}
 </script>
 </body>
 
