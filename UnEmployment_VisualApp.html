@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Visualization - UnEmployment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#myPage"><span style="font-size:30px">V</span>isualization</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="UnEmployment_VisualApp.html">APP</a></li>
+                <li><a href="#band">SOURCES</a></li>
+
+                <li><a href="#contact">CONTACT</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Container (The Band Section) -->
+<div id="band" class="container-fluid " style="margin-top: 20px">
+<div class="row">
+    <a  id="btnClear" class="nav-link pull-lg-left" href="#" onclick="ClearGraph()">Reset to Default Settings</a>
+    <div class="pull-lg-right">
+        <button type="button" id="btndef" class="btn btn-success" onclick="DefaultSetUp()">State vs Range</button>
+        <button type="button" id="btnMulti" class="action-btn active" onclick="multiStateSetUp()">States vs Years </button>
+        <input type="checkbox" id="chkNational" class="action-btn active" checked onclick="toggleNational(this)">National Rate</input>
+        <input type="checkbox" id="chkHighLightRates" class="action-btn active" onclick="toggleTrends(this)">Sudden change rates</input>
+    <input type="text" id="changerate"/>
+    </div>
+</div>
+
+    <div class="row">
+
+        <!--Map Section-->
+        <div class="col-md-4 mapframe">
+            <div class="form-horizontal">
+            <div class="multi-div form-group"></div>
+
+        </div>
+        </div>
+        <!--TimeSeries Section-->
+        <div class="col-md-8 plotframe">
+            <svg width="960 " height="500"></svg>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="js/d3-tooltip.js"></script>
+<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="js/app.js"></script>
+<script src="js/kmeans.js"></script>
+<script>
+
+
+
+</script>
+
+<!-- Footer -->
+<footer class="text-center">
+    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+
+
+    </a><br><br>
+   </footer>
+
+<script>
+
+</script>
+
+</body>
+</html>
+
+
+
