@@ -44,7 +44,7 @@ Rates during Recessions
 As per National Bureau of Economic Research, the major recession period is during 2007-09. The number of long-term unemployed—those jobless 27 weeks or longer—has remained high years after the recession ended in June 2009.
 We can clearly observe those trends here in below graphs
 
-![ScreenShot](https://github.com/manorepo/P2PGnutella/blob/master/Design.png)
+![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Images/National%20Rate%20during%202007%20-%2009.png)
 
 
 ### Credits
