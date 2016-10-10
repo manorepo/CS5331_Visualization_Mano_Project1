@@ -2,6 +2,9 @@
 # US Unemployment Visualization Web Application
 A Web application to anaylize the the US Unemployment rates over the date ranges from 1978 to the current month.
 
+Please click to watch the overview video.
+(http://www.cs.uic.edu/~tdang/TimeArcs/EuroVis2016/TimeArcs_Dang_EuroVis2016.mp4)
+
 ## Sources
 The application uses the seasonally not adusted state wide unemployment rates from the [BLS Website](http://www.bls.gov/). For map, it  uses the US Shape JSON file from the [Census IRE Website](http://census.ire.org/)
 
@@ -69,12 +72,3 @@ There is lot of scope to improve the application by adding the features that hel
 - Clustering - We can make use of javascript library [kmeans-js](https://www.npmjs.com/package/kmeans-js) for clustering.
 - UnEmployment Predicton - Implementation of [Predicting the National Unemployment Rate](http://www.bls.gov/ore/pdf/cp940140.pdf) 
 - Integrating with other parameters like inflation rates, industry wise trends
-
-
-
-
-
-
-
-
-    
