@@ -1,6 +1,6 @@
 
 # US Unemployment Visualization Web Application
-A Web application to anaylize the the US Unemployment rates over the date ranges from 1978 to the current month.
+An Web application to anaylize the the US Unemployment rates over the date ranges from 1978 to the current month.
 
 
 Please click to watch the demo.
