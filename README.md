@@ -45,7 +45,7 @@ We can remove the states from the graph area by clicking on the X icon infront o
 ## Future Work
 
 There is lot of scope to improve the application by adding the features that help for the analysis. Some of those features are
-- Clustering - We can make use of javascript library [kmeans-js](https://www.npmjs.com/package/kmeans-js)for clustering.
+- Clustering - We can make use of javascript library [kmeans-js](https://www.npmjs.com/package/kmeans-js) for clustering.
 - UnEmployment Predicton - 
 - Integrating with other parameters like inflation rates, industry wise trends
 
