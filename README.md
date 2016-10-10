@@ -32,6 +32,7 @@ _**Highlight - Unemployment rate changes**_
 
 The months that experianced specific change rates can be highlighted using the Sudden change rates checkbox. First select the menu and then enter the rate that we want to observe. On selecting the state from the map, the line grpah will be plotted using the black and red markings(circles). 
 Black and Red circles represent the succussive months when that sudden change rate happened.
+![]({{site.baseurl}}/https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Images/slider.png)
 
 ### Different States _vs_ Different Years
 
