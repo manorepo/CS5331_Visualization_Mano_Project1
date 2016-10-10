@@ -63,7 +63,7 @@ We can clearly observe those trends here in below graphs
 
 
 ### Credits
-[Tommy Dang](https://github.com/TuanNhonDang)
+Instructor - [Tommy Dang](https://github.com/TuanNhonDang)
 
 [Mike Bostock](http://bl.ocks.org/mbostock) (D3 Examples)
 
