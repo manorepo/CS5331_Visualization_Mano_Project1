@@ -21,7 +21,24 @@ The selected states in the map and graph can be distinguised with the automatica
 
 Required data range can be set using the provided slider. The line graphs are automatically replotted as per the new  selected data range.
 
-#### Zoom - Graph Area
+**Zoom - Graph Area**
+
+Line graphs can be easily compared using the zoomable option. Select the area on the graph to zoom the content. Double click on the graph to reset the content back to previous state.
+
+**Highlight - Unemployment rate changes**
+
+The months that experianced specific change rates can be highlighted using the Sudden change rates checkbox. First select the menu and then enter the rate that we want to observe. On selecting the state from the map, the line grpah will be plotted using the black and red markings(circles). 
+Black and Red circles represent the succussive months when that sudden change rate happened.
+
+### Different States _vs_ Different Years
+
+With this option, we can compare the different states and different years.
+Select the States vs Years menu. On selecting the states from the menu, it will create enries with State name and an input box for the Year. Enter the years in the provided text box. Then it will plot the graph for the selected state and the year.
+
+We can remove the states from the graph area by clicking on the X icon infront of the state name.
 
 
 
+
+
+    
