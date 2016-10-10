@@ -37,8 +37,17 @@ Select the States vs Years menu. On selecting the states from the menu, it will 
 
 We can remove the states from the graph area by clicking on the X icon infront of the state name.
 
+## Interesting Observations
+
+Rates during Recessions
+
+As per National Bureau of Economic Research, the major recession period is during 2007-09. The number of long-term unemployed—those jobless 27 weeks or longer—has remained high years after the recession ended in June 2009.
+We can clearly observe those trends here in below graphs
+
+
+
 ### Credits
-[Tommy Dang](https://github.com/TuanNhonDang)
+[Tommy Dang](https://github.com/TuanNhonDang)he number of long-term unemployed—those jobless 27 weeks or longer—has remained high years after the recession ended in June 2009
 
 [Mike Bostock](http://bl.ocks.org/mbostock) (D3 Examples)
 
