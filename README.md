@@ -39,6 +39,7 @@ We can remove the states from the graph area by clicking on the X icon infront o
 
 ### Credits
 [Tommy Dang](https://github.com/TuanNhonDang)
+
 [Mike Bostock](http://bl.ocks.org/mbostock) (D3 Examples)
 
 ## Future Work
