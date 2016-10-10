@@ -48,7 +48,7 @@ We can clearly observe those trends here in below graphs
 <p style="text-align:center">National Rate - 2007-09</p>
 
 ![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Images/Texas%20during%202007%20-%2009.png)
-<p style="text-align:center">National Rate - 2007-09</p>
+<p style="text-align:center">Texas, Idaho - 2007-09</p>
 				
 
 
