@@ -19,6 +19,8 @@ Using the Map, we can select/deselect the particular state to plot its respectiv
 The selected states in the map and graph can be distinguised with the automatically associated colors.
 
 Required data range can be set using the provided slider. The line graphs are automatically replotted as per the new  selected data range.
+![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Images/slider.png)
+
 
 _**Zoom - Graph Area**_
 
