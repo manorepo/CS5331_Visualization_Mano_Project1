@@ -2,6 +2,8 @@
 # US Unemployment Visualization Web Application
 A Web application to anaylize the the US Unemployment rates over the date ranges from 1978 to the current month.
 
+
+Please click to watch the demo.
 [![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Video/video_bg.png)](http://myweb.ttu.edu/mkotapat/CS5331/Demo_Video.mp4)
 
 ## Sources
