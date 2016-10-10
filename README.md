@@ -45,7 +45,8 @@ As per National Bureau of Economic Research, the major recession period is durin
 We can clearly observe those trends here in below graphs
 
 ![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Images/National%20Rate%20during%202007%20-%2009.png)
-				National Rate - 2007-09
+<div style="text-align:center">National Rate - 2007-09</div>
+				
 
 
 ### Credits
