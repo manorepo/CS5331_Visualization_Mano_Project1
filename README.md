@@ -53,7 +53,7 @@ We can clearly observe those trends here in below graphs
 
 
 ### Credits
-[Tommy Dang](https://github.com/TuanNhonDang)he number of long-term unemployed—those jobless 27 weeks or longer—has remained high years after the recession ended in June 2009
+[Tommy Dang](https://github.com/TuanNhonDang)
 
 [Mike Bostock](http://bl.ocks.org/mbostock) (D3 Examples)
 
