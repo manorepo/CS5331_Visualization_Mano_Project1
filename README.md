@@ -2,7 +2,7 @@
 # US Unemployment Visualization Web Application
 A Web application to anaylize the the US Unemployment rates over the date ranges from 1978 to the current month.
 
-[![ScreenShot](http://www.cs.uic.edu/~tdang/TimeArcs/EuroVis2016/VideoTeaser.png)](http://www.cs.uic.edu/~tdang/TimeArcs/EuroVis2016/TimeArcs_Dang_EuroVis2016.mp4)
+[![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Video/video_bg.png)](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Video/Demo_Video.mp4)
 
 ## Sources
 The application uses the seasonally not adusted state wide unemployment rates from the [BLS Website](http://www.bls.gov/). For map, it  uses the US Shape JSON file from the [Census IRE Website](http://census.ire.org/)
