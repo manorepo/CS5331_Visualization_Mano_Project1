@@ -1,6 +1,5 @@
-# CS5331_Visualization_Mano_Project 1
 
-## Unemployment Visualization Web Application
+# US Unemployment Visualization Web Application
 A Web application to anaylize the the US Unemployment rates over the date ranges from 1978 to the current month.
 
 ## Sources
