@@ -6,6 +6,8 @@ An Web application to anaylize the the US Unemployment rates over the date range
 Please click to watch the demo.
 [![ScreenShot](https://github.com/manorepo/CS5331_Visualization_Mano_Project1/blob/master/Video/video_bg.png)](http://myweb.ttu.edu/mkotapat/CS5331/Demo_Video.mp4)
 
+[Application Link](https://manorepo.github.io/UnEmployment_VisualApp.html )
+
 ## Sources
 The application uses the seasonally not adusted state wide unemployment rates from the [BLS Website](http://www.bls.gov/). For map, it  uses the US Shape JSON file from the [Census IRE Website](http://census.ire.org/)
 
