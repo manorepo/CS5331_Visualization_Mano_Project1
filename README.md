@@ -14,7 +14,14 @@ Application mainly divided into two menus
 
 ### States _vs_ Time Range
 
+By default, the application shows the National Unemployment rate through line graph that distributed from the 1976 to 2011. It has the check box option to select/deselect the National Unemployment from the graph.
 
+Using the Map, we can select/deselect the particular state to plot its respective employment rate to the Graph Area.
+The selected states in the map and graph can be distinguised with the automatically associated colors.
+
+Required data range can be set using the provided slider. The line graphs are automatically replotted as per the new  selected data range.
+
+#### Zoom - Graph Area
 
 
 
