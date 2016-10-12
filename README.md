@@ -11,6 +11,16 @@ Please click below to watch the demo.
 ## Sources
 The application uses the seasonally not adusted state wide unemployment rates from the [BLS Website](http://www.bls.gov/). For map, it  uses the US Shape JSON file from the [Census IRE Website](http://census.ire.org/)
 
+_**Data Preprocessing**_
+
+Parsed the [All States](http://download.bls.gov/pub/time.series/la/) tsv data file  which has records in format of **_seriesid		year		period		value_**
+
+-series ids are in the format of LAU_XXXXXXXXXXXXXXXMM_ where _XXXXXXXXXXXXXXX_ indicates the state code, _MM_(Measure code) indicates type of the data. Measure Code 03 is for unemployment rate.
+
+_E.g. Alabama Unemployment rate Series Id - LAUST010000000000003_
+
+
+
 ## How it works?
 
 Application mainly divided into two menus
